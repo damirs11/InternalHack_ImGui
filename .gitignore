@@ -1,0 +1,7 @@
+[Rr]elease 
+[Dd]ebug
+.vs/
+/bin
+/*.user
+/*.VC.db
+/*.opendb
