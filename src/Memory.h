@@ -8,7 +8,7 @@
 
 class Memory final{
 public:
-	Memory() noexcept;
+	Memory();
 	
 	std::uintptr_t findPattern(const std::string&, const std::string&) const;
 

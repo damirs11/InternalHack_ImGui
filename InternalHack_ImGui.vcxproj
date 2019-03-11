@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\DllMain.cpp" />
+    <ClCompile Include="src\Memory_DummyDeviceMethod.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
@@ -101,6 +102,7 @@
   <ItemGroup>
     <ClInclude Include="src\GUI.h" />
     <ClInclude Include="src\hooks.h" />
+    <ClInclude Include="src\Memory_DummyDeviceMethod.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
     <ClInclude Include="src\imgui\imgui_impl_dx9.h" />

@@ -3,7 +3,8 @@
 #include "imgui/imgui_impl_win32.h"
 
 #include "hooks.h"
-#include "Memory.h"
+//#include "Memory.h"
+#include "Memory_DummyDeviceMethod.h"
 
 extern IMGUI_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -74,6 +75,15 @@ static LRESULT STDMETHODCALLTYPE hookedReset(IDirect3DDevice9* thisptr, D3DPRESE
 	return hooks.originalReset(thisptr, params);
 }
 
+#ifdef _MEMORY_DD_METHOD_H_
+Hooks::Hooks() {
+	originalPresent = **reinterpret_cast<decltype(&originalPresent)*>(memory_DD.present);
+	**reinterpret_cast<void***>(memory_DD.present) = reinterpret_cast<void*>(&hookedPresent);
+
+	originalReset = **reinterpret_cast<decltype(&originalReset)*>(memory_DD.reset);
+	**reinterpret_cast<void***>(memory_DD.reset) = reinterpret_cast<void*>(&hookedReset);
+}
+#else
 Hooks::Hooks() {
 	originalPresent = **reinterpret_cast<decltype(&originalPresent)*>(memory.present);
 	**reinterpret_cast<void***>(memory.present) = reinterpret_cast<void*>(&hookedPresent);
@@ -81,3 +91,7 @@ Hooks::Hooks() {
 	originalReset = **reinterpret_cast<decltype(&originalReset)*>(memory.reset);
 	**reinterpret_cast<void***>(memory.reset) = reinterpret_cast<void*>(&hookedReset);
 }
+#endif
+
+
+

@@ -1,6 +1,6 @@
 #include "Memory.h"
 
-Memory::Memory() noexcept
+Memory::Memory()
 {
 	try
 	{
