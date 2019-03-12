@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef _MEMORY_METHOD_H_
+#define _MEMORY_METHOD_H_
+#endif
+
 #include <string_view>
 #include <regex>
 #include <stdexcept>
