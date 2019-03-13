@@ -1,24 +1,15 @@
 #include "Memory_DummyDeviceMethod.h"
 
-Memory_DummyDevice::Memory_DummyDevice()
+Memory_DummyDevice::Memory_DummyDevice() : d3d9(nullptr), d3d9_device(nullptr)
 {
-	try
-	{
-		if (!GetVTable(vTable)) {
-			MessageBox(NULL, "GetD3D9Device return false", "GetD3D9Device", MB_OK | MB_ICONERROR);
-			std::exit(EXIT_FAILURE);
-		}
+	temp_window = new Window("TempWindow");
 
-		present = reinterpret_cast<ptrdiff_t>(vTable[17]);
-		reset	= reinterpret_cast<ptrdiff_t>(vTable[16]);
-	}
-	catch (const std::runtime_error& e)
-	{
-		MessageBox(NULL, e.what(), "Error", MB_OK | MB_ICONERROR);
-		std::exit(EXIT_FAILURE);
-	}
-	
-		
+	HMODULE hModule = GetModuleHandle("d3d9.dll");
+
+	if (hModule == nullptr)
+		throw ERROR;
+
+	const 
 
 }
 
@@ -50,4 +41,24 @@ bool Memory_DummyDevice::GetVTable(void** vTable) noexcept
 	vTable = *reinterpret_cast<void***>(pDummyDevice);
 
 	return true;
+}
+
+std::vector<UINT> Memory_DummyDevice::VTable() const
+{
+	UINT vtbl[VTableElements];
+
+	memcpy(	vtbl,
+			*reinterpret_cast<UINT**>(d3d9_device),
+			VTableElements * sizeof(UINT));
+
+	return std::vector<UINT>(vtbl, vtbl + sizeof(vtbl) / sizeof(vtbl[0]));
+}
+
+Memory_DummyDevice::~Memory_DummyDevice()
+{
+	if (d3d9_device)
+		d3d9_device->Release();
+	
+	if (d3d9)
+		d3d9->Release();
 }
