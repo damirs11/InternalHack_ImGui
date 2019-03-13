@@ -3,8 +3,8 @@
 #include "imgui/imgui_impl_win32.h"
 
 #include "hooks.h"
-#include "Memory.h"
-//#include "Memory_DummyDeviceMethod.h"
+//#include "Memory.h"
+#include "Memory_DummyDeviceMethod.h"
 
 extern IMGUI_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
