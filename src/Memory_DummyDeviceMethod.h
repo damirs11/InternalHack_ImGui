@@ -19,6 +19,7 @@ public:
 	Memory_DummyDevice();
 
 	bool GetD3D9Device(void** pTable, size_t Size) noexcept;
+	bool GetVTable(void** vTable) noexcept;
 
 	std::uintptr_t present;
 	std::uintptr_t reset;
