@@ -64,11 +64,11 @@ static LRESULT STDMETHODCALLTYPE hookedReset(IDirect3DDevice9* device, D3DPRESEN
 
 #ifdef _MEMORY_DD_METHOD_H_
 Hooks::Hooks() {
-	originalPresent = **reinterpret_cast<decltype(&originalPresent)*>(memory_DD.present);
-	**reinterpret_cast<void***>(memory_DD.present) = reinterpret_cast<void*>(&hookedPresent);
+	originalPresent = **reinterpret_cast<decltype(&originalPresent)*>(memory_DD.VTable[Direct3DDevice9Functions::Present]);
+	**reinterpret_cast<void***>(memory_DD.VTable[Direct3DDevice9Functions::Present]) = reinterpret_cast<void*>(&hookedPresent);
 
-	originalReset = **reinterpret_cast<decltype(&originalReset)*>(memory_DD.reset);
-	**reinterpret_cast<void***>(memory_DD.reset) = reinterpret_cast<void*>(&hookedReset);
+	originalReset = **reinterpret_cast<decltype(&originalReset)*>(memory_DD.VTable[Direct3DDevice9Functions::Reset]);
+	**reinterpret_cast<void***>(memory_DD.VTable[Direct3DDevice9Functions::Reset]) = reinterpret_cast<void*>(&hookedReset);
 }
 #else
 Hooks::Hooks() {

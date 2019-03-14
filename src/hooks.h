@@ -7,10 +7,9 @@ class Hooks final{
 public:
 	Hooks();
 	
-	WNDPROC originalWndProc;
-
-	std::add_pointer_t<HRESULT STDMETHODCALLTYPE(IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA*)> originalPresent;
-	std::add_pointer_t<HRESULT STDMETHODCALLTYPE(IDirect3DDevice9*, D3DPRESENT_PARAMETERS*)> originalReset;
+	static WNDPROC originalWndProc;
+	static std::add_pointer_t<HRESULT STDMETHODCALLTYPE(IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA*)> originalPresent;
+	static std::add_pointer_t<HRESULT STDMETHODCALLTYPE(IDirect3DDevice9*, D3DPRESENT_PARAMETERS*)> originalReset;
 
 private:
 };
